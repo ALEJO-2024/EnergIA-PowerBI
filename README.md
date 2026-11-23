@@ -1,47 +1,50 @@
-# 📊 EnergIA — Reporte Ejecutivo en Power BI (Sector Eléctrico - Antioquia)
+# 📊 EnergIA — Plataforma de Business Intelligence en Power BI (Sector Eléctrico - Antioquia)
+
+<p align="center">
+  <img src="logo.jpeg" alt="EnergIA Logo" width="260"/>
+</p>
 
 ## 📌 Descripción del Proyecto
-**EnergIA** es una solución de Business Intelligence enfocada en centralizar y analizar la operación de distribución de energía eléctrica en Antioquia. A partir de información fragmentada de clima, infraestructura de red, suscriptores y tarifas, este reporte transforma datos dispersos en indicadores claros para la toma de decisiones oportunas ante contingencias.
+**EnergIA** es una solución de Business Intelligence enfocada en centralizar y analizar la operación de distribución de energía eléctrica en Antioquia[cite: 4]. A partir de información fragmentada de clima, infraestructura de red, suscriptores y tarifas, este proyecto transforma datos dispersos en indicadores claros para la toma de decisiones oportunas ante contingencias[cite: 4].
 
-Este repositorio contiene el desarrollo realizado íntegramente en **Microsoft Power BI**, incluyendo el modelado de datos, medidas DAX y visualizaciones ejecutivas.
-
----
-
-## 🎯 Objetivos del Tablero
-* **Unificar fuentes:** Integrar en una sola vista las variables climáticas, operativas y financieras.
-* **Monitorear continuidad:** Evaluar el cumplimiento de calidad del servicio y la resolución de incidencias.
-* **Priorizar mantenimiento:** Identificar los municipios y zonas con mayor vulnerabilidad ante eventos climáticos.
+Este repositorio contiene el desarrollo estructurado bajo el formato **Power BI Project (`.pbip`)**[cite: 12], permitiendo el control de versiones del modelo semántico, las definiciones del reporte, el análisis exploratorio (EDA) y los pipelines de datos[cite: 12].
 
 ---
 
 ## 📊 Métricas e Indicadores Principales (2021)
-* **Impacto Financiero:** $432 mil M COP en pérdidas operativas por interrupciones analizadas.
-* **Continuidad del Servicio:** 74,25% de cumplimiento operativo.
-* **Efectividad de Resolución:** 86,10% de cierre efectivo de incidencias.
-* **Correlación Climática:** 24,18% de fallas vinculadas a picos de precipitación pluvial.
-* **Municipios de Mayor Criticidad:** Medellín, Bello, Caucasia y Apartadó.
+* **Impacto Financiero:** $432 mil M COP en pérdidas operativas por interrupciones analizadas[cite: 4].
+* **Continuidad del Servicio:** 74,25% de cumplimiento operativo[cite: 4].
+* **Efectividad de Resolución:** 86,10% de cierre efectivo de incidencias[cite: 4].
+* **Correlación Climática:** 24,18% de fallas vinculadas a picos de precipitación pluvial[cite: 4].
+* **Municipios de Mayor Criticidad:** Medellín, Bello, Caucasia y Apartadó[cite: 4].
 
 ---
 
 ## 🛠️ Herramientas Utilizadas
-* **Visualización y Modelado:** Microsoft Power BI Desktop, DAX, Power Query.
+* **Visualización y Modelado:** Microsoft Power BI Desktop (`.pbip`), DAX, Power Query[cite: 4, 12].
+* **Preparación y Análisis:** Python / SQL para análisis exploratorio (`eda`) y estructuración de datos (`pipeline`)[cite: 12].
 
 ---
 
 ## 📁 Estructura del Repositorio
-* `EnergIA_Dashboard.pbix` — Archivo fuente del reporte interactivo en Power BI.
-* `capturas/` — Imágenes de las vistas principales del tablero *(recomendado subir 2 o 3 capturas para que se vean directamente en GitHub)*.
+* `dashboard - power bi.pbip` — Archivo principal del proyecto de Power BI[cite: 12].
+* `dashboard - power bi.Report/` — Definición visual, páginas y configuraciones del tablero[cite: 12].
+* `dashboard - power bi.SemanticModel/` — Modelo de datos, relaciones y medidas DAX[cite: 12].
+* `eda/` y `pipeline/` — Scripts y flujos de exploración y preparación de datos[cite: 12].
+* `base-de-datos/`, `datos finales/` y `datos-reportes/` — Conjuntos de datos procesados y tablas de soporte para el modelo[cite: 12].
+* `aplicacion/`, `generacion/` y `muestras/` — Recursos complementarios y muestras de validación[cite: 12].
+* `docs/` — Documentación técnica y presentación ejecutiva del proyecto[cite: 12].
 
 ---
 
 ## 🔗 Repositorio Complementario y Demo Web
-* ⚡ **[Ver versión en Databricks + MVP Web Interactivo](https://github.com/ALEJO-2024/EnergIA-Databricks-MVP.git)** 
-* 🌐 **[Ver Dashboard Web en Vivo (Netlify)](https://proyecto-integrador-betek-2026.netlify.app/)**
+* ⚡ **[Ver versión en Databricks + MVP Web Interactivo](https://github.com/ALEJO-2024/EnergIA-Databricks-MVP)**
+* 🌐 **[Ver Dashboard Web en Vivo (Netlify)](https://proyectointegrador-betek.netlify.app)**
 
 ---
 
 ## 👥 Equipo de Desarrollo
-* **Oscar Alejandro Londoño Gil**
-* **Diana Marcela Escudero**
-* **Samuel David Ruiz**
-* **Juliana Gómez**
+* **Oscar Alejandro Londoño Gil**[cite: 4]
+* **Diana Marcela Escudero**[cite: 4]
+* **Samuel David Ruiz**[cite: 4]
+* **Juliana Gómez**[cite: 4]
