@@ -1,0 +1,42 @@
+table poblacion
+	lineageTag: 6024bfa5-23b9-4a10-a862-c0627dc9c1a6
+
+	measure 'Habitantes publicados' = IF(ISFILTERED(geografia[cod_divipola]), CALCULATE(SUM(poblacion[habitantes]), poblacion[area] = "Total", poblacion[anio] = 2021), CALCULATE(SUM(poblacion[habitantes]), poblacion[area] = "Total", poblacion[anio] = 2021, geografia[cod_divipola] = "05001"))
+		formatString: #,0
+		lineageTag: 8422d99f-3422-41aa-ba25-16e3c1f79d88
+
+	column cod_divipola
+		dataType: string
+		lineageTag: 5df510f9-93d2-499c-a8b2-aa37ef7a3c23
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column anio
+		dataType: int64
+		lineageTag: 034f1d44-181a-4c19-a15a-374e0dcfdb18
+		summarizeBy: none
+		sourceColumn: anio
+
+	column area
+		dataType: string
+		lineageTag: 6fe28187-00b6-4d6c-b724-1d8e988356d3
+		summarizeBy: none
+		sourceColumn: area
+
+	column habitantes
+		dataType: int64
+		lineageTag: 057eae4d-01e3-4a51-b674-607e50b832b6
+		summarizeBy: sum
+		sourceColumn: habitantes
+
+	partition poblacion = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\poblacion.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"cod_divipola", type text}, {"anio", Int64.Type}, {"area", type text}, {"habitantes", Int64.Type}})
+				in
+				    Tipos
+

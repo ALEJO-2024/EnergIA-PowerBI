@@ -1,0 +1,13 @@
+anio,mes,tipo_informacion,tipo_tarifa,tipo_dato,rango_consumo,nivel,precio_propiedad_epm,precio_compartido,precio_propiedad_cliente,precio_punta,precio_fuera_punta
+2021,1,Monomia,Residencial,Estrato 1,Rango > CS,I,573.05,,,,
+2021,2,Monomia,Residencial,Estrato 1,Rango > CS,I,576.49,,,,
+2021,3,Monomia,Residencial,Estrato 1,Rango > CS,I,579.94,,,,
+2021,4,Monomia,Residencial,Estrato 1,Rango > CS,I,583.42,,,,
+2021,5,Monomia,Residencial,Estrato 1,Rango > CS,I,586.92,,,,
+2021,6,Monomia,Residencial,Estrato 1,Rango > CS,I,590.45,,,,
+2021,7,Monomia,Residencial,Estrato 1,Rango > CS,I,593.99,,,,
+2021,8,Monomia,Residencial,Estrato 1,Rango > CS,I,597.55,,,,
+2021,9,Monomia,Residencial,Estrato 1,Rango > CS,I,602.33,,,,
+2021,10,Monomia,Residencial,Estrato 1,Rango > CS,I,607.15,,,,
+2021,11,Monomia,Residencial,Estrato 1,Rango > CS,I,612.01,,,,
+2021,12,Monomia,Residencial,Estrato 1,Rango > CS,I,616.90,,,,

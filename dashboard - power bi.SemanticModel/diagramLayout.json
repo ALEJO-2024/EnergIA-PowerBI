@@ -1,0 +1,204 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1102.4487122117528,
+            "y": 827.569575185284
+          },
+          "nodeIndex": "activo",
+          "nodeLineageTag": "bee0d5de-a379-4897-9a1a-d8ceeb332e30",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 411.02632472922755,
+            "y": 629.132994593113
+          },
+          "nodeIndex": "cliente",
+          "nodeLineageTag": "3d3fdaa3-96ce-4c8a-9f7e-118cc6654d5b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 699.54327663862057,
+            "y": 827.56972012736719
+          },
+          "nodeIndex": "clima",
+          "nodeLineageTag": "3fcff081-86ed-4dd0-aeea-6ca5528f8835",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 411.02639384603447,
+            "y": 904.9202732534809
+          },
+          "nodeIndex": "consumo",
+          "nodeLineageTag": "557fab63-5c2e-46ff-94ec-844c8450d6b7",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 416.5493879464666
+          },
+          "nodeIndex": "factura",
+          "nodeLineageTag": "ebc64ff5-9105-4393-8ddc-32c2079010dd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 976.14526210239615,
+            "y": 1156.5380856158872
+          },
+          "nodeIndex": "falla",
+          "nodeLineageTag": "012d7ab4-d15f-4086-a4cd-bdef2991ff6e",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 820.21055493624021,
+            "y": 547.29854780544758
+          },
+          "nodeIndex": "geografia",
+          "nodeLineageTag": "b7ec2d25-9649-401e-900d-351f461dea57",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1345.692519193379,
+            "y": 1154.5694891249645
+          },
+          "nodeIndex": "mantenimiento",
+          "nodeLineageTag": "fb46efc7-532a-43df-b54b-ba3ef354913c",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 917.78104981394654,
+            "y": 211.16372338501742
+          },
+          "nodeIndex": "poblacion",
+          "nodeLineageTag": "6024bfa5-23b9-4a10-a862-c0627dc9c1a6",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 629.974446360887,
+            "y": -50
+          },
+          "nodeIndex": "sui",
+          "nodeLineageTag": "0bff45c4-1226-4891-92f3-250fd163bc9a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1110.1769908369001,
+            "y": 466.09673156003339
+          },
+          "nodeIndex": "sui_estrato",
+          "nodeLineageTag": "4d17176c-c196-4a0e-bbf6-6f485848575a",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 340.096642576775,
+            "y": 225.77849669478724
+          },
+          "nodeIndex": "sui_tipo",
+          "nodeLineageTag": "7f233c7c-cc73-4bee-bdff-9191890c4562",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1579.6925191933788,
+            "y": 601.26904280794361
+          },
+          "nodeIndex": "tarifa",
+          "nodeLineageTag": "034da8d4-bc11-4d18-bc41-5574c499fd93",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 658.18855371078337,
+            "y": 1157.5232105454634
+          },
+          "nodeIndex": "tiempo",
+          "nodeLineageTag": "4616676c-182c-461d-bb69-d0a5be885db4",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: makaia-postgres
+    environment:
+      POSTGRES_USER: makaia
+      POSTGRES_PASSWORD: makaia
+      POSTGRES_DB: makaia
+    ports:
+      - "5432:5432"
+    volumes:
+      - makaia-pg:/var/lib/postgresql/data
+      - ./cargar.sql:/sql/cargar.sql:ro
+      - ../datos-reportes/modelo:/datos/modelo:ro
+      - ../generacion/salida:/datos/operacion:ro
+
+volumes:
+  makaia-pg:

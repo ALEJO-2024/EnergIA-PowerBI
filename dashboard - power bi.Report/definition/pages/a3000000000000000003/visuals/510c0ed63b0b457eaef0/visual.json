@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "510c0ed63b0b457eaef0",
+  "position": {
+    "x": 24,
+    "y": 52,
+    "z": 1000,
+    "height": 64,
+    "width": 1500,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Cada falla cae sobre un equipo dentro de Medellín. En esta corrida hay 522 fallas. La lluvia va en el gráfico de abajo, una vez por día, no dentro de cada falla.",
+                    "textStyle": {
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": "12pt",
+                      "color": "#F7FAFC"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

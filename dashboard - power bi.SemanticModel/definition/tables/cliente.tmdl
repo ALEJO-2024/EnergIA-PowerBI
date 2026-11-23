@@ -1,0 +1,46 @@
+table cliente
+	lineageTag: 3d3fdaa3-96ce-4c8a-9f7e-118cc6654d5b
+
+	column cliente_id
+		dataType: string
+		isKey
+		lineageTag: b57dc7ea-0876-4868-8f37-bbe429f2152f
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+	column cod_divipola
+		dataType: string
+		lineageTag: 21750004-4e60-4d8b-a365-ed992573e269
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column tipo_cliente
+		dataType: string
+		lineageTag: f66a22f5-ab23-4deb-897b-e88e9d8daa3f
+		summarizeBy: none
+		sourceColumn: tipo_cliente
+
+	column estrato
+		dataType: int64
+		lineageTag: 29df5a80-b052-4d8a-bcde-1901448f8461
+		summarizeBy: none
+		sourceColumn: estrato
+
+	column estado
+		dataType: string
+		lineageTag: c9884208-5d4e-425b-8654-b1051a5ff6cb
+		summarizeBy: none
+		sourceColumn: estado
+
+	partition cliente = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\cliente.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Limpios = Table.ReplaceValue(Nombres, "", null, Replacer.ReplaceValue, {"estrato"}),
+				    Tipos = Table.TransformColumnTypes(Limpios, {{"cliente_id", type text}, {"cod_divipola", type text}, {"tipo_cliente", type text}, {"estrato", Int64.Type}, {"estado", type text}})
+				in
+				    Tipos
+

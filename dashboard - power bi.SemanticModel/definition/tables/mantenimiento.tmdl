@@ -1,0 +1,58 @@
+table mantenimiento
+	lineageTag: fb46efc7-532a-43df-b54b-ba3ef354913c
+
+	measure 'Costo total' = CALCULATE(SUM(mantenimiento[costo]), TREATAS(VALUES(tiempo[fecha]), mantenimiento[fecha]))
+		formatString: $#,0
+		lineageTag: 877de768-419a-4ddf-b44d-c47b558c96e9
+
+	column mantenimiento_id
+		dataType: string
+		isKey
+		lineageTag: c4d7e8b0-efd8-464c-a79f-fd2023f05fc5
+		summarizeBy: none
+		sourceColumn: mantenimiento_id
+
+	column infraestructura_id
+		dataType: string
+		lineageTag: 91e7aaac-a6fb-4a49-ace9-feac641a9bb7
+		summarizeBy: none
+		sourceColumn: infraestructura_id
+
+	column fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e347ebea-dfc4-4d9d-b72f-a8e84fbeb368
+		summarizeBy: none
+		sourceColumn: fecha
+
+		variation Variation
+			isDefault
+			relationship: 1ec61724-9adb-4518-b6fb-c15fe703c7e0
+			defaultHierarchy: LocalDateTable_70200ffb-48a6-4e07-9c64-14fa9041604f.'Jerarquía de fechas'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column tipo
+		dataType: string
+		lineageTag: 1cdcc526-9d92-4fc0-83f0-826145c2268b
+		summarizeBy: none
+		sourceColumn: tipo
+
+	column costo
+		dataType: double
+		formatString: #,0
+		lineageTag: 43235f7e-51fd-49a4-9d42-09b76bfd61b0
+		summarizeBy: sum
+		sourceColumn: costo
+
+	partition mantenimiento = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\mantenimiento.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"mantenimiento_id", type text}, {"infraestructura_id", type text}, {"fecha", type date}, {"tipo", type text}, {"costo", type number}})
+				in
+				    Tipos
+

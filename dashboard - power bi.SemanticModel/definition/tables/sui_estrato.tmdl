@@ -1,0 +1,39 @@
+table sui_estrato
+	lineageTag: 4d17176c-c196-4a0e-bbf6-6f485848575a
+
+	measure 'Usuarios estrato' = IF(ISFILTERED(geografia[cod_divipola]), SUM(sui_estrato[usuarios]), CALCULATE(SUM(sui_estrato[usuarios]), geografia[cod_divipola] = "05001"))
+		formatString: #,0
+		lineageTag: 33f383d9-edbe-4e32-abdd-a7ac628d9b53
+
+	column cod_divipola
+		dataType: string
+		lineageTag: da0f73cd-ae0e-4110-9d9d-2464e4714394
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column estrato
+		dataType: string
+		lineageTag: 2d2bf7a2-3b84-40ef-b1ab-2179054e0f84
+		summarizeBy: none
+		sourceColumn: estrato
+
+	column usuarios
+		dataType: int64
+		lineageTag: 53e02aac-a9c3-4076-8fa2-9928a799c2b4
+		summarizeBy: sum
+		sourceColumn: usuarios
+
+	partition sui_estrato = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\sui.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.TransformColumnNames(Table.PromoteHeaders(Origen, [PromoteAllScalars = true]), each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Estrecho = Table.SelectColumns(Encabezados, {"cod_divipola", "estrato_1", "estrato_2", "estrato_3", "estrato_4", "estrato_5", "estrato_6"}),
+				    Largo = Table.Unpivot(Estrecho, {"estrato_1", "estrato_2", "estrato_3", "estrato_4", "estrato_5", "estrato_6"}, "estrato", "usuarios"),
+				    Nombres = Table.ReplaceValue(Largo, "estrato_", "", Replacer.ReplaceText, {"estrato"}),
+				    Limpios = Table.ReplaceValue(Nombres, "", null, Replacer.ReplaceValue, {"usuarios"}),
+				    Salida = Table.TransformColumnTypes(Limpios, {{"cod_divipola", type text}, {"estrato", type text}, {"usuarios", Int64.Type}})
+				in
+				    Salida
+

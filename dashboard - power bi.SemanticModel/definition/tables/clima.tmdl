@@ -1,0 +1,61 @@
+table clima
+	lineageTag: 3fcff081-86ed-4dd0-aeea-6ca5528f8835
+
+	measure 'Lluvia mm' = SUM(clima[precipitacion_mm])
+		formatString: #,0.0
+		lineageTag: 0521b846-eb14-4b53-a5eb-0d1f3d945f64
+
+	column cod_divipola
+		dataType: string
+		lineageTag: b88d416f-8602-45a5-adc8-a35f7c74c325
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column fecha_hora
+		dataType: dateTime
+		lineageTag: ee86f7b4-9cba-4243-81fe-fc5ed67e6196
+		summarizeBy: none
+		sourceColumn: fecha_hora
+
+	column precipitacion_mm
+		dataType: double
+		formatString: #,0.0
+		lineageTag: dd8debfd-e31b-4da8-9960-152e0bf88a91
+		summarizeBy: sum
+		sourceColumn: precipitacion_mm
+
+	column temperatura_2m
+		dataType: double
+		lineageTag: 7d4f4d0b-6119-4432-b824-4fc217146e2d
+		summarizeBy: none
+		sourceColumn: temperatura_2m
+
+	column humedad_relativa
+		dataType: double
+		lineageTag: d27a30ac-1529-4bc0-9d6a-29408fb4c1af
+		summarizeBy: none
+		sourceColumn: humedad_relativa
+
+	column viento_kmh
+		dataType: double
+		lineageTag: 790e51b4-a290-4a35-9c4e-5e26eb693449
+		summarizeBy: none
+		sourceColumn: viento_kmh
+
+	column presion_hpa
+		dataType: double
+		lineageTag: 03b6ea03-8733-45f5-b252-21ddfbefbf23
+		summarizeBy: none
+		sourceColumn: presion_hpa
+
+	partition clima = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\clima.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"cod_divipola", type text}, {"fecha_hora", type datetime}, {"precipitacion_mm", type number}, {"temperatura_2m", type number}, {"humedad_relativa", type number}, {"viento_kmh", type number}, {"presion_hpa", type number}})
+				in
+				    Tipos
+

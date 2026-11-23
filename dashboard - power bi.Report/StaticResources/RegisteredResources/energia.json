@@ -1,0 +1,123 @@
+{
+  "name": "EnergIA",
+  "dataColors": [
+    "#2EE6C8",
+    "#9FD4FF",
+    "#E7C27A",
+    "#E08B84",
+    "#A9BDD2",
+    "#F7FAFC",
+    "#7D93AA"
+  ],
+  "foreground": "#F7FAFC",
+  "foregroundNeutralSecondary": "#A9BDD2",
+  "foregroundNeutralTertiary": "#7D93AA",
+  "background": "#061525",
+  "backgroundLight": "#0C2744",
+  "backgroundNeutral": "#0C2744",
+  "tableAccent": "#2EE6C8",
+  "good": "#2EE6C8",
+  "neutral": "#E7C27A",
+  "bad": "#E08B84",
+  "maximum": "#2EE6C8",
+  "center": "#E7C27A",
+  "minimum": "#E08B84",
+  "textClasses": {
+    "callout": {
+      "fontFace": "IBM Plex Sans",
+      "color": "#F7FAFC"
+    },
+    "title": {
+      "fontFace": "IBM Plex Sans",
+      "color": "#F7FAFC"
+    },
+    "header": {
+      "fontFace": "IBM Plex Sans",
+      "color": "#F7FAFC"
+    },
+    "label": {
+      "fontFace": "IBM Plex Sans",
+      "color": "#F7FAFC"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "*": [
+          {
+            "fontFamily": "IBM Plex Sans",
+            "color": {
+              "solid": {
+                "color": "#F7FAFC"
+              }
+            }
+          }
+        ],
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0C2744"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "title": [
+          {
+            "fontFamily": "IBM Plex Sans",
+            "fontColor": {
+              "solid": {
+                "color": "#F7FAFC"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "IBM Plex Sans",
+            "color": {
+              "solid": {
+                "color": "#F7FAFC"
+              }
+            }
+          }
+        ],
+        "categoryAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#F7FAFC"
+              }
+            },
+            "fontFamily": "IBM Plex Sans"
+          }
+        ],
+        "valueAxis": [
+          {
+            "labelColor": {
+              "solid": {
+                "color": "#F7FAFC"
+              }
+            },
+            "fontFamily": "IBM Plex Sans"
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#061525"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

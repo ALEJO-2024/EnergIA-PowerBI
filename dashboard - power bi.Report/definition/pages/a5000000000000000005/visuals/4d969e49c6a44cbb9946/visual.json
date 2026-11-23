@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4d969e49c6a44cbb9946",
+  "position": {
+    "x": 24,
+    "y": 52,
+    "z": 1000,
+    "height": 64,
+    "width": 1500,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Contexto publicado. No es la muestra de 1.000 clientes. En 2021 hay 2.507.620 habitantes en el área Total y 996.993 suscriptores. No se suman entre sí ni con la cabecera.",
+                    "textStyle": {
+                      "fontFamily": "IBM Plex Sans",
+                      "fontSize": "12pt",
+                      "color": "#F7FAFC"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

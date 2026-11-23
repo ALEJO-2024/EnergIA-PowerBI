@@ -1,0 +1,38 @@
+table sui_tipo
+	lineageTag: 7f233c7c-cc73-4bee-bdff-9191890c4562
+
+	measure 'Usuarios tipo' = IF(ISFILTERED(geografia[cod_divipola]), SUM(sui_tipo[usuarios]), CALCULATE(SUM(sui_tipo[usuarios]), geografia[cod_divipola] = "05001"))
+		formatString: #,0
+		lineageTag: 49159eff-3e32-4f7f-b7ad-3874b1d06d8c
+
+	column cod_divipola
+		dataType: string
+		lineageTag: 1ca6bda6-eba5-495b-9ae5-5306a04e31ec
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column tipo_cliente
+		dataType: string
+		lineageTag: 254478b7-4af7-4dfa-9381-2ccacfc5c658
+		summarizeBy: none
+		sourceColumn: tipo_cliente
+
+	column usuarios
+		dataType: int64
+		lineageTag: d96493a3-d32b-4424-9e55-c3e2f3ff0b64
+		summarizeBy: sum
+		sourceColumn: usuarios
+
+	partition sui_tipo = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\sui.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.TransformColumnNames(Table.PromoteHeaders(Origen, [PromoteAllScalars = true]), each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Estrecho = Table.SelectColumns(Encabezados, {"cod_divipola", "industrial", "comercial", "oficial", "otros"}),
+				    Largo = Table.Unpivot(Estrecho, {"industrial", "comercial", "oficial", "otros"}, "tipo_cliente", "usuarios"),
+				    Limpios = Table.ReplaceValue(Largo, "", null, Replacer.ReplaceValue, {"usuarios"}),
+				    Salida = Table.TransformColumnTypes(Limpios, {{"cod_divipola", type text}, {"tipo_cliente", type text}, {"usuarios", Int64.Type}})
+				in
+				    Salida
+

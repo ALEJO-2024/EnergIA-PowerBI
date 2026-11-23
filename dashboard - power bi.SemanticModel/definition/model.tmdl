@@ -1,0 +1,36 @@
+model Model
+	culture: es-CO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBI_QueryOrder = ["geografia","tiempo","cliente","activo","consumo","factura","falla","mantenimiento","clima","poblacion","sui","sui_estrato","sui_tipo","tarifa"]
+
+ref table geografia
+ref table tiempo
+ref table cliente
+ref table activo
+ref table consumo
+ref table factura
+ref table falla
+ref table mantenimiento
+ref table clima
+ref table poblacion
+ref table sui
+ref table sui_estrato
+ref table sui_tipo
+ref table tarifa
+ref table DateTableTemplate_ea2c109c-34e1-4117-a19d-c3c509001694
+ref table LocalDateTable_93e9ce9d-6279-4886-92c6-97f569621e08
+ref table LocalDateTable_8a9ca73f-f7bc-4ee7-8cc4-60ea67529803
+ref table LocalDateTable_70200ffb-48a6-4e07-9c64-14fa9041604f
+
+ref cultureInfo es-CO
+

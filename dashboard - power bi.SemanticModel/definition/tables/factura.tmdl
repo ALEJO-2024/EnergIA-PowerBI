@@ -1,0 +1,81 @@
+table factura
+	lineageTag: ebc64ff5-9105-4393-8ddc-32c2079010dd
+
+	measure 'Valor facturado' = CALCULATE(SUM(factura[valor_facturado]), TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: $#,0
+		lineageTag: 9c444543-fd91-444a-b9dd-4ce429f374b6
+
+	measure 'kWh facturados' = CALCULATE(SUM(factura[consumo_kwh_mes]), TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: #,0.0
+		lineageTag: 865289e1-ecd3-454d-b750-9e40e1199159
+
+	measure Cuentas = CALCULATE(COUNTROWS(factura), TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: #,0
+		lineageTag: f36998df-1a0b-4338-ad85-64279e1e60f0
+
+	measure Pagadas = CALCULATE(COUNTROWS(factura), factura[estado_pago] = "pagada", TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: #,0
+		lineageTag: 5b769611-23f8-4b83-8f83-56e407117998
+
+	measure Pendientes = CALCULATE(COUNTROWS(factura), factura[estado_pago] = "pendiente", TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: #,0
+		lineageTag: b5e42ef5-2b36-45a6-b10d-fb6a4d7bab8a
+
+	measure 'En mora' = CALCULATE(COUNTROWS(factura), factura[estado_pago] = "en mora", TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: #,0
+		lineageTag: 524b1212-9d5b-42b0-b5cd-7a2ea1d2e3bf
+
+	measure 'Tarifa media' = CALCULATE(AVERAGE(factura[tarifa]), TREATAS(VALUES(tiempo[periodo]), factura[periodo]))
+		formatString: $#,0.00
+		lineageTag: 0ff82af9-0602-4700-9243-56dcecbbd86d
+
+	column cliente_id
+		dataType: string
+		lineageTag: eae3d18d-3109-4df9-89a5-88b85ff02965
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+	column periodo
+		dataType: string
+		lineageTag: 815b342c-74ce-4c67-9a22-65a109d60af3
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column consumo_kwh_mes
+		dataType: double
+		formatString: #,0.0000
+		lineageTag: b28314b1-3645-41ef-854c-6dd4a702ccff
+		summarizeBy: sum
+		sourceColumn: consumo_kwh_mes
+
+	column valor_facturado
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 16fa15bd-5947-41cf-a23e-9182256ba6ed
+		summarizeBy: sum
+		sourceColumn: valor_facturado
+
+	column tarifa
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ba002bee-7f34-48ab-b256-8e0d8b7f1d16
+		summarizeBy: none
+		sourceColumn: tarifa
+
+	column estado_pago
+		dataType: string
+		lineageTag: cf4e003b-4fc7-4ed0-ba57-2fffa5797cd2
+		summarizeBy: none
+		sourceColumn: estado_pago
+
+	partition factura = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\factura.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"cliente_id", type text}, {"periodo", type text}, {"consumo_kwh_mes", type number}, {"valor_facturado", type number}, {"tarifa", type number}, {"estado_pago", type text}})
+				in
+				    Tipos
+

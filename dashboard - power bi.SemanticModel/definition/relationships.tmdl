@@ -1,0 +1,71 @@
+relationship 2f34d835117042b0bff137ca53b340a9
+	fromColumn: cliente.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship 334b703325d34f429d4ccad7c9a784f7
+	fromColumn: activo.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship e620adb850134c5b88f5bb7ffee981d9
+	fromColumn: clima.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship d74ef31ca2714a078286d589200983ad
+	fromColumn: poblacion.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship 3e802db6552c4777afa9bfe9cad4592d
+	fromColumn: sui.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship 4b276d9099004a008c88b25b1314b2f5
+	fromColumn: sui_estrato.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship 98966fd20e97473d9a96199684cf1cc8
+	fromColumn: sui_tipo.cod_divipola
+	toColumn: geografia.cod_divipola
+
+relationship 8cf3fa60f9f646d5ab4f0eeb01d54cde
+	fromColumn: consumo.cliente_id
+	toColumn: cliente.cliente_id
+
+relationship aa75213d02154fccb241b2e0660ba4ad
+	fromColumn: consumo.fecha_hora
+	toColumn: tiempo.fecha_hora
+
+relationship b20dab537eeb46bcb43c81de5bfb3d8f
+	fromColumn: factura.cliente_id
+	toColumn: cliente.cliente_id
+
+relationship c893f9631fa740d7bcd6cab056e27842
+	fromColumn: falla.infraestructura_id
+	toColumn: activo.infraestructura_id
+
+relationship 7834e8e4570745e0b701dd9ef8e60f78
+	fromColumn: falla.fecha_hora
+	toColumn: tiempo.fecha_hora
+
+relationship 939017b6a76d43cc8cdf37834865f55c
+	fromColumn: mantenimiento.infraestructura_id
+	toColumn: activo.infraestructura_id
+
+relationship 8aafa1d89e8a44d2b7bc3838a462fabd
+	fromColumn: clima.fecha_hora
+	toColumn: tiempo.fecha_hora
+
+relationship cc58b101-d425-4215-818a-e64305221ae3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: tiempo.fecha
+	toColumn: LocalDateTable_93e9ce9d-6279-4886-92c6-97f569621e08.Date
+
+relationship 3aa918c4-bc36-4009-9380-816e8f8989bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activo.fecha_instalacion
+	toColumn: LocalDateTable_8a9ca73f-f7bc-4ee7-8cc4-60ea67529803.Date
+
+relationship 1ec61724-9adb-4518-b6fb-c15fe703c7e0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: mantenimiento.fecha
+	toColumn: LocalDateTable_70200ffb-48a6-4e07-9c64-14fa9041604f.Date
+

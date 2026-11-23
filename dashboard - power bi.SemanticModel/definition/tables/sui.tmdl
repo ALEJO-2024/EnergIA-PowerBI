@@ -1,0 +1,121 @@
+table sui
+	lineageTag: 0bff45c4-1226-4891-92f3-250fd163bc9a
+
+	measure Suscriptores = IF(ISFILTERED(geografia[cod_divipola]), CALCULATE(SUM(sui[total_residencial]) + SUM(sui[total_no_residencial]), sui[anio] = 2021, sui[periodo] = 25, sui[ubicacion] = "Total"), CALCULATE(SUM(sui[total_residencial]) + SUM(sui[total_no_residencial]), sui[anio] = 2021, sui[periodo] = 25, sui[ubicacion] = "Total", geografia[cod_divipola] = "05001"))
+		formatString: #,0
+		lineageTag: 31d9dc3f-5c25-4db4-a61a-1a3ab1c3cf6a
+
+	column cod_divipola
+		dataType: string
+		lineageTag: cd3d27ee-89ae-404a-9649-97d86ccdf0aa
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column anio
+		dataType: int64
+		lineageTag: 140d8b8a-798d-4ae0-aeba-c59b57de64e4
+		summarizeBy: none
+		sourceColumn: anio
+
+	column periodo
+		dataType: int64
+		lineageTag: 82a8eab5-9fb5-4dae-9cf6-e00b1eaf3d69
+		summarizeBy: none
+		sourceColumn: periodo
+
+	column ubicacion
+		dataType: string
+		lineageTag: 993bf21b-be5b-44e6-8fda-beaf3fa2ef34
+		summarizeBy: none
+		sourceColumn: ubicacion
+
+	column empresa
+		dataType: string
+		lineageTag: 00b9c5dc-ef42-4524-ad7c-c9b4d41f5f68
+		summarizeBy: none
+		sourceColumn: empresa
+
+	column estrato_1
+		dataType: int64
+		lineageTag: 811e572a-874b-4d8d-857c-dd1eb710847a
+		summarizeBy: sum
+		sourceColumn: estrato_1
+
+	column estrato_2
+		dataType: int64
+		lineageTag: ffd92ac7-3697-4f1a-b6f6-5a68362102af
+		summarizeBy: sum
+		sourceColumn: estrato_2
+
+	column estrato_3
+		dataType: int64
+		lineageTag: 648070b0-6a6d-4c0c-a78c-b0113e62e10c
+		summarizeBy: sum
+		sourceColumn: estrato_3
+
+	column estrato_4
+		dataType: int64
+		lineageTag: 4bd81f0f-eb0b-4fcb-8a73-4fb8703dca92
+		summarizeBy: sum
+		sourceColumn: estrato_4
+
+	column estrato_5
+		dataType: int64
+		lineageTag: 6bfcd783-9cb0-4d87-b821-3208bc2b9d8b
+		summarizeBy: sum
+		sourceColumn: estrato_5
+
+	column estrato_6
+		dataType: int64
+		lineageTag: dee9a5e0-7fc7-4969-a587-e92b4abb604d
+		summarizeBy: sum
+		sourceColumn: estrato_6
+
+	column total_residencial
+		dataType: int64
+		lineageTag: e615c6e4-5abf-4309-aa4e-88f7817d2889
+		summarizeBy: sum
+		sourceColumn: total_residencial
+
+	column industrial
+		dataType: int64
+		lineageTag: 5333c32d-8b8e-4bae-a5d6-24b9e0fcce24
+		summarizeBy: sum
+		sourceColumn: industrial
+
+	column comercial
+		dataType: int64
+		lineageTag: 1803bb77-93de-4f69-8171-c5f45d8f1eea
+		summarizeBy: sum
+		sourceColumn: comercial
+
+	column oficial
+		dataType: int64
+		lineageTag: 206ece26-c75b-423b-8d95-6b907bd50347
+		summarizeBy: sum
+		sourceColumn: oficial
+
+	column otros
+		dataType: int64
+		lineageTag: 42570d23-0567-4929-8cf5-26e7b4428c57
+		summarizeBy: sum
+		sourceColumn: otros
+
+	column total_no_residencial
+		dataType: int64
+		lineageTag: 3e01829c-b2b3-4c61-bfa7-99957b7bd418
+		summarizeBy: sum
+		sourceColumn: total_no_residencial
+
+	partition sui = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\sui.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Limpios = Table.ReplaceValue(Nombres, "", null, Replacer.ReplaceValue, {"estrato_1", "estrato_2", "estrato_3", "estrato_4", "estrato_5", "estrato_6", "industrial", "comercial", "oficial", "otros"}),
+				    Tipos = Table.TransformColumnTypes(Limpios, {{"cod_divipola", type text}, {"anio", Int64.Type}, {"periodo", Int64.Type}, {"ubicacion", type text}, {"empresa", type text}, {"estrato_1", Int64.Type}, {"estrato_2", Int64.Type}, {"estrato_3", Int64.Type}, {"estrato_4", Int64.Type}, {"estrato_5", Int64.Type}, {"estrato_6", Int64.Type}, {"total_residencial", Int64.Type}, {"industrial", Int64.Type}, {"comercial", Int64.Type}, {"oficial", Int64.Type}, {"otros", Int64.Type}, {"total_no_residencial", Int64.Type}})
+				in
+				    Tipos
+

@@ -1,0 +1,92 @@
+table tarifa
+	lineageTag: 034da8d4-bc11-4d18-bc41-5574c499fd93
+
+	measure 'Precio publicado' = CALCULATE(AVERAGE(tarifa[precio_propiedad_epm]), TREATAS(VALUES(tiempo[anio]), tarifa[anio]), TREATAS(VALUES(tiempo[mes]), tarifa[mes]))
+		formatString: $#,0.00
+		lineageTag: 72838099-e750-4110-9db7-101500ecd922
+
+	column anio
+		dataType: int64
+		lineageTag: e0a45faa-41ae-4225-b1d6-fb14ec83960a
+		summarizeBy: none
+		sourceColumn: anio
+
+	column mes
+		dataType: int64
+		lineageTag: 8c02b126-b5be-4b25-8236-45e8d93d7310
+		summarizeBy: none
+		sourceColumn: mes
+
+	column tipo_informacion
+		dataType: string
+		lineageTag: b597243a-e300-427f-80f4-af0456dd209d
+		summarizeBy: none
+		sourceColumn: tipo_informacion
+
+	column tipo_tarifa
+		dataType: string
+		lineageTag: 96f4c962-1fb1-4a48-ac09-4194ad95060f
+		summarizeBy: none
+		sourceColumn: tipo_tarifa
+
+	column tipo_dato
+		dataType: string
+		lineageTag: 02ce7d75-7e19-4f67-aba3-0108f8bc6927
+		summarizeBy: none
+		sourceColumn: tipo_dato
+
+	column rango_consumo
+		dataType: string
+		lineageTag: 3ce1c1d4-127b-42fb-8b10-be66b9c0d7e2
+		summarizeBy: none
+		sourceColumn: rango_consumo
+
+	column nivel
+		dataType: string
+		lineageTag: 7b990450-aa5c-4fb4-b054-37e47f8f36e2
+		summarizeBy: none
+		sourceColumn: nivel
+
+	column precio_propiedad_epm
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ffba87e7-ef34-469c-aa22-987e6cd98609
+		summarizeBy: none
+		sourceColumn: precio_propiedad_epm
+
+	column precio_compartido
+		dataType: double
+		lineageTag: f665dd0a-e7ce-425f-a5f7-cc2f7d01232b
+		summarizeBy: none
+		sourceColumn: precio_compartido
+
+	column precio_propiedad_cliente
+		dataType: double
+		lineageTag: 4919bb36-171e-4032-8a75-fbcbe1bf373f
+		summarizeBy: none
+		sourceColumn: precio_propiedad_cliente
+
+	column precio_punta
+		dataType: double
+		lineageTag: 01791545-c270-43f5-90c7-6ba82d60bb09
+		summarizeBy: none
+		sourceColumn: precio_punta
+
+	column precio_fuera_punta
+		dataType: double
+		lineageTag: ae4bf03b-58f4-4e99-9fde-fbba23661526
+		summarizeBy: none
+		sourceColumn: precio_fuera_punta
+
+	partition tarifa = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\tarifa.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Limpios = Table.ReplaceValue(Nombres, "", null, Replacer.ReplaceValue, {"precio_compartido", "precio_propiedad_cliente", "precio_punta", "precio_fuera_punta"}),
+				    Tipos = Table.TransformColumnTypes(Limpios, {{"anio", Int64.Type}, {"mes", Int64.Type}, {"tipo_informacion", type text}, {"tipo_tarifa", type text}, {"tipo_dato", type text}, {"rango_consumo", type text}, {"nivel", type text}, {"precio_propiedad_epm", type number}, {"precio_compartido", type number}, {"precio_propiedad_cliente", type number}, {"precio_punta", type number}, {"precio_fuera_punta", type number}})
+				in
+				    Tipos
+

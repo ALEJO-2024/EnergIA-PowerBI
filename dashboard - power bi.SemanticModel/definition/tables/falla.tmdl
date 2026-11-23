@@ -1,0 +1,64 @@
+table falla
+	lineageTag: 012d7ab4-d15f-4086-a4cd-bdef2991ff6e
+
+	measure Fallas = COUNTROWS(falla)
+		formatString: #,0
+		lineageTag: 5897a9ff-b857-42b2-87c5-5c80fa5a05aa
+
+	measure 'Clientes alcanzados' = SUM(falla[clientes_afectados])
+		formatString: #,0
+		lineageTag: 2d71fd26-5883-4ced-98fa-c2a38c9108b6
+
+	measure Minutos = SUM(falla[duracion_minutos])
+		formatString: #,0
+		lineageTag: 862191ad-bae1-4e47-b9c2-5c1defdcfd89
+
+	measure 'Fallas destacadas' =
+			VAR puesto = RANKX(ALLSELECTED(falla[fecha_hora]), CALCULATE(COUNTROWS(falla)), , DESC, DENSE)
+			RETURN IF(puesto <= 12, COUNTROWS(falla))
+		formatString: #,0
+		lineageTag: 4c8e1a2b-7d63-4f10-9a55-6e2b0c91d4aa
+
+	column incidente_id
+		dataType: string
+		isKey
+		lineageTag: f1cb3f39-0f11-48fe-a150-5efd9c3ed23f
+		summarizeBy: none
+		sourceColumn: incidente_id
+
+	column infraestructura_id
+		dataType: string
+		lineageTag: f63c2bf5-0075-46a6-81dc-d2cd3caf091c
+		summarizeBy: none
+		sourceColumn: infraestructura_id
+
+	column fecha_hora
+		dataType: dateTime
+		formatString: dd/MM/yyyy HH:mm
+		lineageTag: 7c0faf0f-ec93-47a9-8af5-386513ce77fe
+		summarizeBy: none
+		sourceColumn: fecha_hora
+
+	column clientes_afectados
+		dataType: int64
+		lineageTag: 202750b6-bb57-4548-80a6-61c77faad86c
+		summarizeBy: sum
+		sourceColumn: clientes_afectados
+
+	column duracion_minutos
+		dataType: int64
+		lineageTag: 21b4df64-b233-49e3-87b0-c86420748046
+		summarizeBy: sum
+		sourceColumn: duracion_minutos
+
+	partition falla = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\falla.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"incidente_id", type text}, {"infraestructura_id", type text}, {"fecha_hora", type datetime}, {"clientes_afectados", Int64.Type}, {"duracion_minutos", Int64.Type}})
+				in
+				    Tipos
+

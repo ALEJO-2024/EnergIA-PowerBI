@@ -1,0 +1,53 @@
+table geografia
+	lineageTag: b7ec2d25-9649-401e-900d-351f461dea57
+
+	column cod_divipola
+		dataType: string
+		isKey
+		lineageTag: ece12394-0b27-4df4-a9bd-76efa87ecc23
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column nombre
+		dataType: string
+		lineageTag: ae2872a2-a102-4e77-82b7-242349c8777b
+		summarizeBy: none
+		sourceColumn: nombre
+
+	column departamento
+		dataType: string
+		lineageTag: 0a9924d2-4999-4bf9-bbb4-9a6767d35fe8
+		summarizeBy: none
+		sourceColumn: departamento
+
+	column tipo_municipio
+		dataType: string
+		lineageTag: 4260f710-ddf4-446d-bead-e5e0aae93960
+		summarizeBy: none
+		sourceColumn: tipo_municipio
+
+	column latitud
+		dataType: double
+		lineageTag: f0dab483-e903-4d3a-8896-b26ae6b5fc60
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: latitud
+
+	column longitud
+		dataType: double
+		lineageTag: 68b5c1af-010c-43ca-b954-ea2be559a516
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: longitud
+
+	partition geografia = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\geografia.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Nombres = Table.TransformColumnNames(Encabezados, each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Nombres, {{"cod_divipola", type text}, {"nombre", type text}, {"departamento", type text}, {"tipo_municipio", type text}, {"latitud", type number}, {"longitud", type number}})
+				in
+				    Tipos
+

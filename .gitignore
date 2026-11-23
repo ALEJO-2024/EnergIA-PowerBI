@@ -1,0 +1,15 @@
+.env
+**/.env
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+node_modules/
+__pycache__/
+*.py[cod]
+
+# GitHub rechaza archivos de más de 100 MB. El consumo horario se queda en la carpeta.
+datos finales/consumo.csv
+generacion/salida/04-consumo.csv
+
+# El mapa municipal pesa demasiado para el repositorio. Las coordenadas ya están en geografia.csv.
+muestras/mgn2025-mpio.zip
+muestras/mgn2025-mpio/

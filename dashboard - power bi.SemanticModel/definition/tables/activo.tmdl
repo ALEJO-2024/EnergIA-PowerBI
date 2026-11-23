@@ -1,0 +1,79 @@
+table activo
+	lineageTag: bee0d5de-a379-4897-9a1a-d8ceeb332e30
+
+	column infraestructura_id
+		dataType: string
+		isKey
+		lineageTag: f1c85b77-07b8-498b-bae3-c5ece204be48
+		summarizeBy: none
+		sourceColumn: infraestructura_id
+
+	column cod_divipola
+		dataType: string
+		lineageTag: 30ed2090-06dd-4cc9-a2ed-92e93e21c86d
+		summarizeBy: none
+		sourceColumn: cod_divipola
+
+	column tipo
+		dataType: string
+		lineageTag: f8935ca4-9909-4c20-90aa-f2928057e824
+		summarizeBy: none
+		sourceColumn: tipo
+
+	column latitud
+		dataType: double
+		lineageTag: ab126803-47d9-4be3-9457-82cfc3a28815
+		dataCategory: Latitude
+		summarizeBy: sum
+		sourceColumn: latitud
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitud
+		dataType: double
+		lineageTag: 02622039-e779-47a7-92cd-f33faee9fcd2
+		dataCategory: Longitude
+		summarizeBy: sum
+		sourceColumn: longitud
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_instalacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5f67b8fd-7700-4733-9f4f-c926b24f3915
+		summarizeBy: none
+		sourceColumn: fecha_instalacion
+
+		variation Variation
+			isDefault
+			relationship: 3aa918c4-bc36-4009-9380-816e8f8989bf
+			defaultHierarchy: LocalDateTable_8a9ca73f-f7bc-4ee7-8cc4-60ea67529803.'Jerarquía de fechas'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column estado
+		dataType: string
+		lineageTag: 47d72343-8518-4939-8f6b-f95d3c1d71b0
+		summarizeBy: none
+		sourceColumn: estado
+
+	column antiguedad
+		dataType: int64
+		lineageTag: c8c27382-1e17-4f75-91f2-18182b98ad35
+		summarizeBy: sum
+		sourceColumn: antiguedad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activo = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\\Users\\ruizd\\Pictures\\BI\\datos finales\\activo.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.TransformColumnNames(Table.PromoteHeaders(Origen, [PromoteAllScalars = true]), each Text.Replace(_, Character.FromNumber(65279), "")),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"infraestructura_id", type text}, {"cod_divipola", type text}, {"tipo", type text}, {"latitud", type number}, {"longitud", type number}, {"fecha_instalacion", type date}, {"estado", type text}}),
+				    Salida = Table.AddColumn(Tipos, "antiguedad", each 2021 - Date.Year([fecha_instalacion]), Int64.Type)
+				in
+				    Salida
+
